@@ -7,19 +7,34 @@ async function getRecipes() {
     throw new Error('Error', r.status)
 };
 
-async function init() {
-    const recipes = await getRecipes()
-    console.log(recipes);
+async function init(filter) {
+    let recipes = await getRecipes();
+    console.log(filter);
+    if (filter !== undefined) {
+       recipes = filter;
+    }
+    
     displayRecipes(recipes);
 };
 
 async function displayRecipes(recipes) {
+    console.log(recipes);
     const querySelector = document.querySelector(".recipes-section");
+    querySelector.innerHTML = '';
     recipes.forEach((recipe) => {
         const recipeModel = recipeFactory(recipe);
         const recipeCardDom = recipeModel.getRecipeCardDom();
         querySelector.appendChild(recipeCardDom)
     })
+};
+
+async function getFilter() {
+    let recipes = await getRecipes();
+    repices = filterGlobal(recipes);
+    // repices = filterByIngredients(recipes)
+    // repices = filterByDevices(recipes)
+    // repices = filterByUtensils(recipes)
 }
 
+getFilter()
 init();

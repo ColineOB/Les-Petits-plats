@@ -54,6 +54,6 @@ function ingredientsList(ingredients) {
         }
         ul.append(li);
     }
-    console.log(ul);
+    // console.log(ul);
     return ul
 }
