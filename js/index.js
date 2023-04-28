@@ -17,6 +17,7 @@ async function init(filter) {
     for(var key in AttributesBTN) {
         displayBtn(key, AttributesBTN[key])
     }
+    
     btn(recipes)
     displayRecipes(recipes);
 };

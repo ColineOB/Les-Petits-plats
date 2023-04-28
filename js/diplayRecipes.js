@@ -90,7 +90,7 @@ function btn(recipes) {
             search.style.display = 'block';
             search.focus();
             div.innerHTML = "";
-            ul.innerHTML = '';
+            ul.innerHTML = "";
             let set = new Set();
             recipes.forEach((recipe) => {
                 switch(title) {
@@ -103,7 +103,6 @@ function btn(recipes) {
                         set.add(recipe.appliance)
                         break;
                     case 'ustensiles':
-                        type = 'ustensils'
                         recipe.ustensils.forEach((u) => {
                             set.add(u);
                         })
