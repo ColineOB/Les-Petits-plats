@@ -9,11 +9,15 @@ async function getRecipes() {
 
 async function init(filter) {
     let recipes = await getRecipes();
-    console.log(filter);
     if (filter !== undefined) {
        recipes = filter;
     }
+    let AttributesBTN = {'ingrédients': 'primary', 'appareils':'success','ustensiles':'danger'}
     
+    for(var key in AttributesBTN) {
+        displayBtn(key, AttributesBTN[key])
+    }
+    btn(recipes)
     displayRecipes(recipes);
 };
 
