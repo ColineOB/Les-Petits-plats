@@ -57,72 +57,36 @@ function ingredientsList(ingredients) {
     // console.log(ul);
     return ul
 }
-function displayBtn(title, color) {
-    const filter = document.querySelector(".filter");
-    const div = document.createElement('div');
-    const button = document.createElement('button');
-    const search = document.createElement('input');
-    setAttributes(button, {"type":"button","data-title": title, 'class': "btn btn-"+ color +' dropdown-toggle mx-2 bouton', "data-bs-toggle":"dropdown","aria-expanded":false});
-    setAttributes(search, {"class":"searchFilter form-control", "type":"text", "name":"search "+ title, "placeholder": "Rechercher un "+ title, "style":'display : none', 'onchange': 'filterDetails()'})
-    div.setAttribute("class","btn-group");
-    button.append(title);
-    div.append(button, search);
-    filter.append(div);
-}
 
-function btn(recipes) {
-    const filter = document.querySelector(".filter")
+// function displayBtn(title, color) {
+//     const filter = document.querySelector(".filter");
+//     const div = document.createElement('div');
+//     const button = document.createElement('button');
+//     const search = document.createElement('input');
+//     setAttributes(button, {"type":"button","data-title": title, 'class': "btn btn-"+ color +' dropdown-toggle mx-2 bouton', "data-bs-toggle":"dropdown","aria-expanded":false});
+//     setAttributes(search, {"class":"searchFilter form-control", "type":"text", "name":"search "+ title, "placeholder": "Rechercher un "+ title, "style":'display : none'})
+//     div.setAttribute("class","btn-group");
+//     button.append(title);
+//     div.append(button, search);
+//     filter.append(div);
+// }
+
+function btn(button, recipes, title) {
     const input = document.querySelectorAll(".bouton")
     const inputSearch = document.querySelectorAll(".searchFilter")
-    let type = '';
-    const div = document.createElement('div');
-    div.setAttribute("class","listFilter");
-    filter.append(div);
-    input.forEach(function(button) {
-        const title = button.dataset.title;
-        const search = document.querySelector(" input[name='search "+ title +"']")
-        const ul = document.createElement('ul');
-
-        button.addEventListener('click', (evt) => {
-            reset(input, 'block');
-            reset(inputSearch, 'none');
-            button.style.display = 'none';
-            search.style.display = 'block';
-            search.focus();
-            div.innerHTML = "";
-            ul.innerHTML = "";
-            let set = new Set();
-            recipes.forEach((recipe) => {
-                switch(title) {
-                    case 'ingrédients':
-                        recipe.ingredients.forEach((r) => {
-                            set.add(r.ingredient);
-                        })
-                        break;
-                    case 'appareils':
-                        set.add(recipe.appliance)
-                        break;
-                    case 'ustensiles':
-                        recipe.ustensils.forEach((u) => {
-                            set.add(u);
-                        })
-                        break;
-                }
-            })
-            set.forEach((list)=> {
-                const li = document.createElement('li');
-                li.append(list);
-                ul.append(li)
-            })
-            console.log('set',set);
-            console.log('li', ul);
-            div.append(ul);
-        })
+    const ul = document.createElement('ul');
+    const search = document.querySelector(" input[name='search "+ title +"']")
+    reset(input, 'block');
+    reset(inputSearch, 'none');
+    button.style.display = 'none';
+    search.style.display = 'block';
+    ul.innerHTML = "";
+    recipes.forEach((list)=> {
+        const li = document.createElement('li');
+        li.append(list);
+        ul.append(li)
     })
-    // input.addEventListener('click', (evt) => {
-        // console.log(evt, title);
-        // input.replaceWith(search)
-    // })
+    return ul;
 }
 
 function reset (list, type){

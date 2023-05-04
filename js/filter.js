@@ -1,4 +1,5 @@
 function filterGlobal(data) {
+    console.log("data", data);
     const search = document.querySelector('.search');
     search.addEventListener('input', (evt) => {
         let input = search.value
@@ -16,21 +17,19 @@ function filterGlobal(data) {
 
 }
 
-function filterDetails(data) {
-    const inputSearch = document.querySelectorAll(".searchFilter")
-    inputSearch.forEach(function(input) {
-        search.addEventListener('input', (evt) => {
+function filterDetails(data, search) {
+    
+    search.addEventListener('input', (evt) => {
+        let input = search.value
             if (search.value.length >= 1) {
-                let filterG = data.filter(function (el)
+                let filterG = data.has(function (el)
                 {
                     return el.name.toLowerCase().includes(input.toLowerCase())
                 });
-                init(filterG)
+                getFilter(filterG)
             } else {
                 init(undefined)
     
             }
         })
-    })
-    
 }
