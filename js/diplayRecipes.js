@@ -54,22 +54,9 @@ function ingredientsList(ingredients) {
         }
         ul.append(li);
     }
-    // console.log(ul);
     return ul
 }
 
-// function displayBtn(title, color) {
-//     const filter = document.querySelector(".filter");
-//     const div = document.createElement('div');
-//     const button = document.createElement('button');
-//     const search = document.createElement('input');
-//     setAttributes(button, {"type":"button","data-title": title, 'class': "btn btn-"+ color +' dropdown-toggle mx-2 bouton', "data-bs-toggle":"dropdown","aria-expanded":false});
-//     setAttributes(search, {"class":"searchFilter form-control", "type":"text", "name":"search "+ title, "placeholder": "Rechercher un "+ title, "style":'display : none'})
-//     div.setAttribute("class","btn-group");
-//     button.append(title);
-//     div.append(button, search);
-//     filter.append(div);
-// }
 
 function btn(button, recipes, title) {
     console.log(recipes);

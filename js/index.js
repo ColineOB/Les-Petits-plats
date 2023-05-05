@@ -59,6 +59,12 @@ async function getFilter(recipes) {
             search.focus();
             filterDetails(set)
         })
+        search.addEventListener("focusout", (evt) => {
+            search.style.display = 'none';
+            button.style.display = 'block';
+            const div = document.querySelector(".listFilter")
+            div.innerHTML = "";
+        })
 
     })
     // repices = filterByIngredients(recipes)
