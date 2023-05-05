@@ -1,14 +1,29 @@
 function filterGlobal(data) {
-    console.log("data", data);
     const search = document.querySelector('.search');
     search.addEventListener('input', (evt) => {
         let input = search.value
+        let newData = new Set();
+        let newArray = [];
         if (search.value.length >= 3) {
             let filterG = data.filter(function (el)
             {
-                return el.name.toLowerCase().includes(input.toLowerCase())
+                if (el.name.toLowerCase().includes(input.toLowerCase()) ||
+                el.appliance.toLowerCase().includes(input.toLowerCase())) {
+                    newData.add(el)
+                }
+                el.ustensils.filter(function(us) {
+                    if (us.toLowerCase().includes(input.toLowerCase())) {
+                        newData.add(el)
+                    }
+                })
+                el.ingredients.filter(function(li) {
+                    if (li.ingredient.toLowerCase().includes(input.toLowerCase()))
+                    {
+                        newData.add(el)
+                    }
+                })
             });
-            init(filterG)
+            init(Array.from(newData))
         } else {
             init(undefined)
 
@@ -17,19 +32,24 @@ function filterGlobal(data) {
 
 }
 
-function filterDetails(data, search) {
-    
-    search.addEventListener('input', (evt) => {
-        let input = search.value
+function filterDetails(data) {
+    const array = [...data];
+    const searches =  document.querySelectorAll('.searchFilter');
+    searches.forEach((search) => {
+        search.addEventListener('input', (evt)=> {
+            let input = search.value
             if (search.value.length >= 1) {
-                let filterG = data.has(function (el)
+                let filterD = array.filter(function (el)
                 {
-                    return el.name.toLowerCase().includes(input.toLowerCase())
+                    return el.toLowerCase().includes(input.toLowerCase())
                 });
-                getFilter(filterG)
+                
+                list(filterD)
             } else {
-                init(undefined)
-    
+                list(data)
             }
         })
+    })
+
+
 }

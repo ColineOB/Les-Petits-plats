@@ -72,25 +72,36 @@ function ingredientsList(ingredients) {
 // }
 
 function btn(button, recipes, title) {
+    console.log(recipes);
     const input = document.querySelectorAll(".bouton")
     const inputSearch = document.querySelectorAll(".searchFilter")
-    const ul = document.createElement('ul');
-    const search = document.querySelector(" input[name='search "+ title +"']")
+    const search = document.querySelector(" input[name='"+ title +"']")
     reset(input, 'block');
     reset(inputSearch, 'none');
-    button.style.display = 'none';
+    if (button != undefined) {
+        button.style.display = 'none';
+    }
     search.style.display = 'block';
-    ul.innerHTML = "";
-    recipes.forEach((list)=> {
-        const li = document.createElement('li');
-        li.append(list);
-        ul.append(li)
-    })
-    return ul;
+ return list(recipes)
 }
 
 function reset (list, type){
     list.forEach(function(elem) {
         elem.style.display = type;
     })
+}
+
+function list(recipes) {
+    const div = document.querySelector(".listFilter")
+    div.innerHTML = "";
+    const ul = document.createElement('ul');
+    ul.innerHTML = "";
+    recipes.forEach((list)=> {
+        const li = document.createElement('li');
+        li.append(list);
+        ul.append(li)
+    })
+    div.append(ul)
+    console.log(ul);
+    return ;
 }

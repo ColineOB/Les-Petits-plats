@@ -30,37 +30,34 @@ async function displayRecipes(recipes) {
 };
 
 async function getFilter(recipes) {
-    console.log("recipes",recipes);
     //creation list
     const input = document.querySelectorAll(".bouton")
-    const div = document.querySelector(".listFilter")
     input.forEach(function(button) {
         const title = button.dataset.title;
-        const search = document.querySelector(" input[name='search "+ title +"']")
-        console.log(search);
+        const search = document.querySelector(" input[name='"+ title +"']")
         let set = new Set();
         recipes.forEach((recipe) => {
             switch(title) {
                 case 'ingrédients':
                     recipe.ingredients.forEach((r) => {
-                        set.add(r.ingredient);
+                        set.add(r.ingredient.toLowerCase());
                     })
                     break;
                 case 'appareils':
-                    set.add(recipe.appliance)
+                    set.add(recipe.appliance.toLowerCase())
                     break;
                 case 'ustensiles':
                     recipe.ustensils.forEach((u) => {
-                        set.add(u);
+                        set.add(u.toLowerCase());
                     })
                     break;
             }
         })
         button.addEventListener('click', (evt) => {
-            div.innerHTML = "";
-            div.append(btn(button,set, title));
+            console.log(button, set, title);
+            btn(button,set, title);
             search.focus();
-            filterDetails(set, search)
+            filterDetails(set)
         })
 
     })
