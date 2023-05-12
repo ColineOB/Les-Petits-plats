@@ -10,13 +10,19 @@ async function getRecipes() {
 
 // init
 async function init(filter) {
+    console.log("init");
     let recipes = await getRecipes();
+    closetags(recipes)
     if (filter !== undefined) {
        recipes = filter;
     }
-    filterGlobal(recipes);
     getFilter(recipes);
     displayRecipes(recipes);
+    const search = document.querySelector('.search');
+    search.addEventListener('input', (evt) => {
+        filterGlobal(recipes);
+    })
+    // tagFilter(recipes);
 };
 
 async function displayRecipes(recipes) {
@@ -55,21 +61,12 @@ async function getFilter(recipes) {
         })
         button.addEventListener('click', (evt) => {
             console.log(button, set, title);
-            btn(button,set, title);
+            btn(button,set, title, recipes);
             search.focus();
-            filterDetails(set)
         })
-        search.addEventListener("focusout", (evt) => {
-            search.style.display = 'none';
-            button.style.display = 'block';
-            const div = document.querySelector(".listFilter")
-            div.innerHTML = "";
-        })
+        
 
     })
-    // repices = filterByIngredients(recipes)
-    // repices = filterByDevices(recipes)
-    // repices = filterByUtensils(recipes)
 }
 
 getFilter()

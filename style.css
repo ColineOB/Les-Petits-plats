@@ -23,3 +23,28 @@ article {
     height: 50%;
     column-width: 120px;
 }
+.tags ul {
+    display: flex;
+    align-items: center;
+}
+.tags ul li {
+    display: flex;
+    align-items: baseline;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+}
+.tags ul li p {
+    margin:0 10px 0 0;
+}
+
+.ingrédients {
+    background-color: blue;
+}
+.appareils {
+    background-color: green;
+}
+.ustensiles {
+    background-color: red;
+}

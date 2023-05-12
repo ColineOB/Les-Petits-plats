@@ -58,7 +58,7 @@ function ingredientsList(ingredients) {
 }
 
 
-function btn(button, recipes, title) {
+function btn(button, set, title, recipes) {
     console.log(recipes);
     const input = document.querySelectorAll(".bouton")
     const inputSearch = document.querySelectorAll(".searchFilter")
@@ -69,7 +69,7 @@ function btn(button, recipes, title) {
         button.style.display = 'none';
     }
     search.style.display = 'block';
- return list(recipes)
+ return list(set, title, recipes)
 }
 
 function reset (list, type){
@@ -78,17 +78,18 @@ function reset (list, type){
     })
 }
 
-function list(recipes) {
+function list(set, title, recipes) {
     const div = document.querySelector(".listFilter")
     div.innerHTML = "";
     const ul = document.createElement('ul');
     ul.innerHTML = "";
-    recipes.forEach((list)=> {
+    set.forEach((list)=> {
         const li = document.createElement('li');
         li.append(list);
-        ul.append(li)
+        ul.append(li);
     })
     div.append(ul)
     console.log(ul);
+    selectTag(recipes, title)
     return ;
 }
