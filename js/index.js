@@ -22,7 +22,6 @@ async function init(filter) {
     search.addEventListener('input', (evt) => {
         filterGlobal(recipes);
     })
-    // tagFilter(recipes);
 };
 
 async function displayRecipes(recipes) {

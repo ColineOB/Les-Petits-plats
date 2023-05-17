@@ -35,25 +35,6 @@ function filterGlobal(data) {
         }
 }
 
-// function filterDetails(data, title) {
-//     const array = [...data];
-//     const searches =  document.querySelectorAll('.searchFilter');
-//     searches.forEach((search) => {
-//         search.addEventListener('input', (evt)=> {
-//             let input = search.value
-//             if (search.value.length >= 1) {
-//                 let filterD = array.filter(function (el)
-//                 {
-//                     return el.toLowerCase().includes(input.toLowerCase())
-//                 });
-                
-//                 list(filterD, title)
-//             } else {
-//                 list(data, title)
-//             }
-//         })
-//     })
-// }
 
 function selectTag(recipes, title) {
     console.log("coucou");
@@ -144,70 +125,3 @@ function closetags(data) {
     })
 
 }
-// function filterF(data) {
-//     console.log("filterF", data);
-//     const search = document.querySelector('.search');
-//     const listTags = document.querySelector(".tags ul");
-//     let input = search.value
-//     let newData = new Set();
-//     if (input.length >= 3){
-//         console.log("input.length");
-//         let filterG = data.filter(function (el)
-//             {
-//                 if (el.name.toLowerCase().includes(input.toLowerCase()) ||
-//                 el.appliance.toLowerCase().includes(input.toLowerCase())) {
-//                     newData.add(el)
-//                 }
-//                 el.ustensils.filter(function(us) {
-//                     if (us.toLowerCase().includes(input.toLowerCase())) {
-//                         newData.add(el)
-//                     }
-//                 })
-//                 el.ingredients.filter(function(li) {
-//                     if (li.ingredient.toLowerCase().includes(input.toLowerCase()))
-//                     {
-//                         newData.add(el)
-//                     }
-//                 })
-//             })
-//     }
-//     if (listTags.children.length > 0) {
-//         console.log("listTags.children.length");
-//         for (const child of listTags.children) {
-//             console.log(child);
-//             const tag = child.querySelector("p");
-//             let filterTag = data.filter(function (el) {
-//                 switch (child.className) {
-//                     case 'ingrédients':
-//                         el.ingredients.filter(function(li) {
-//                             if (li.ingredient.toLowerCase().includes(tag.innerHTML.toLowerCase()))
-//                             {
-//                                 newData.add(el)
-//                             }
-//                         })
-//                         break;
-//                     case 'appareils':
-//                         if (el.appliance.toLowerCase().includes(tag.innerHTML.toLowerCase())) {
-//                             newData.add(el)
-//                         }
-//                         break;
-//                     case 'ustensiles':
-//                         el.ustensils.filter(function(us) {
-//                             if (us.toLowerCase().includes(tag.innerHTML.toLowerCase())) {
-//                                 newData.add(el)
-//                             }
-//                         })
-//                         break;
-//                 }
-//             })
-
-//         }
-//     }
-//     if (newData.size > 0) {
-//         console.log(newData);
-//         init(Array.from(newData))
-//     } else {
-//         console.log(newData);
-//         init(data)
-//     }
-// }
