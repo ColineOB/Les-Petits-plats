@@ -13,7 +13,7 @@ function recipeFactory(data) {
         const divIngredientsEtDescription = document.createElement('div');
 
         article.setAttribute("class","col mb-4");
-        divCss.setAttribute('class', "containers d-block m-2 bg-light text-dark")
+        divCss.setAttribute('class', "containers d-block m-2 text-dark")
         pDescription.setAttribute("class","textDescription w-50")
         setAttributes(img, {"class":"img"});
         setAttributes(h2, {"class":"h5"});
@@ -91,6 +91,18 @@ function list(set, title, recipes) {
         li.append(list);
         ul.append(li);
     })
+    console.log(title);
+    switch (title) {
+        case "ingrédients":
+            setAttributes(ul, {"class":"bg-primary"});
+            break;
+        case "appareils":
+            setAttributes(ul, {"class":"bg-success"});
+            break;
+        case "ustensiles":
+            setAttributes(ul, {"class":"bg-danger"});
+            break;
+    }
     div.append(ul)
     console.log(ul);
     selectTag(recipes, title)
