@@ -9,15 +9,17 @@ function recipeFactory(data) {
         const clock = document.createElement('i');
         const pDescription = document.createElement('p');
         const divTitle = document.createElement('div');
+        const divCss = document.createElement('div');
         const divIngredientsEtDescription = document.createElement('div');
 
-        article.setAttribute("class","col");
-        pDescription.setAttribute("class","w-50")
+        article.setAttribute("class","col mb-4");
+        divCss.setAttribute('class', "containers d-block m-2 bg-light text-dark")
+        pDescription.setAttribute("class","textDescription w-50")
         setAttributes(img, {"class":"img"});
         setAttributes(h2, {"class":"h5"});
         setAttributes(clock,{"class":"fa-regular fa-clock"})
-        setAttributes(divIngredientsEtDescription,{"class":"d-flex justify-content-between"})
-        setAttributes(divTitle, {"class":"d-flex align-items-center justify-content-between"})
+        setAttributes(divIngredientsEtDescription,{"class":"description d-flex justify-content-between mb-3"})
+        setAttributes(divTitle, {"class":"d-flex align-items-center justify-content-between p-2"})
 
         pDescription.textContent = description;
         h2.textContent = name;
@@ -25,7 +27,8 @@ function recipeFactory(data) {
         ptime.append(clock, time, 'min')
         divTitle.append(h2, ptime);
         divIngredientsEtDescription.append(ingredientsList(ingredients), pDescription);
-        article.append(img, divTitle, divIngredientsEtDescription);
+        divCss.append(img, divTitle, divIngredientsEtDescription);
+        article.append(divCss);
 
         return article;
     }
@@ -45,7 +48,7 @@ function ingredientsList(ingredients) {
     for(var k in ingredients) {
         const li = document.createElement('li');
         
-        li.innerHTML += `<strong>` + ingredients[k].ingredient + `</strong>`
+        li.innerHTML += `<strong>` + ingredients[k].ingredient + `&nbsp;</strong>`
         if (ingredients[k].quantity != undefined) {
             li.innerHTML += ingredients[k].quantity
         }

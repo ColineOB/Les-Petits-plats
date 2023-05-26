@@ -1,4 +1,6 @@
 let boolean = true;
+
+//filter Global
 function filterGlobal(data) {
     console.log("filterGlobal", boolean);
     closeFilter(); 
@@ -35,7 +37,7 @@ function filterGlobal(data) {
         }
 }
 
-
+//if select tag by filter
 function selectTag(recipes, title) {
     console.log("coucou");
     const listFilter = document.querySelectorAll('.listFilter ul li');
@@ -59,6 +61,7 @@ function selectTag(recipes, title) {
     })
 }
 
+// filter recipes by tags
 function tagFilter(data) {
     console.log("data", data);
     const listTags = document.querySelector(".tags ul")
@@ -112,6 +115,7 @@ function closeFilter() {
     })
 }
 
+// delete tags
 function closetags(data) {
     console.log("data",data);
     const listTags = document.querySelectorAll(".tags ul li i")
