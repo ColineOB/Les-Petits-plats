@@ -5,36 +5,58 @@ function filterGlobal(data) {
     console.log("filterGlobal", boolean);
     closeFilter(); 
     const search = document.querySelector('.search');
-        let input = search.value
-        let newData = new Set();
-        if (search.value.length >= 3) {
-            console.log("search.value");
-            boolean = true
-            let filterG = data.filter(function (el)
-            {
-                if (el.name.toLowerCase().includes(input.toLowerCase()) ||
-                el.appliance.toLowerCase().includes(input.toLowerCase())) {
+    let input = search.value
+    let newData = new Set();
+    if (search.value.length >= 3) {
+        boolean = true
+        let filterG = data.filter(function (el)
+        {
+            if (el.name.toLowerCase().includes(input.toLowerCase()) ||
+            el.appliance.toLowerCase().includes(input.toLowerCase())) {
+                newData.add(el)
+            }
+            el.ustensils.filter(function(us) {
+                if (us.toLowerCase().includes(input.toLowerCase())) {
                     newData.add(el)
                 }
-                el.ustensils.filter(function(us) {
-                    if (us.toLowerCase().includes(input.toLowerCase())) {
-                        newData.add(el)
-                    }
-                })
-                el.ingredients.filter(function(li) {
-                    if (li.ingredient.toLowerCase().includes(input.toLowerCase()))
-                    {
-                        newData.add(el)
-                    }
-                })
             })
-            console.log(newData);
-            tagFilter(Array.from(newData))
-        } else if (boolean){
-            boolean = false
-            console.log('filter global else');
-            tagFilter(data);
-        }
+            el.ingredients.filter(function(li) {
+                if (li.ingredient.toLowerCase().includes(input.toLowerCase()))
+                {
+                    newData.add(el)
+                }
+            })
+        })
+        console.log(newData);
+        tagFilter(Array.from(newData))
+    } else if (boolean){
+        boolean = false
+        console.log('filter global else');
+        tagFilter(data);
+    }
+}
+
+//filter tag
+function filterTag(set, recipes, div) {
+    const search = div.parentElement.querySelector('input');
+    let input = search.value
+    let newData = new Set();
+    let array = Array.from(set);
+
+    
+    if (search.value) {
+        console.log(search.value, div.name);
+        array.filter(function (el)
+        {
+            if (el.toLowerCase().includes(input.toLowerCase()))
+            {
+                newData.add(el)
+            }
+        })
+        return list(newData, div.name, recipes)
+    } else {
+        return list(set, div.name, recipes)
+    }
 }
 
 //if select tag by filter
@@ -117,7 +139,6 @@ function closeFilter() {
 
 // delete tags
 function closetags(data) {
-    console.log("data",data);
     const listTags = document.querySelectorAll(".tags ul li i")
     listTags.forEach((close) => {
         close.addEventListener("click", (evt) => {

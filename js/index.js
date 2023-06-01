@@ -16,10 +16,10 @@ async function init(filter) {
     if (filter !== undefined) {
        recipes = filter;
     }
+    console.log(recipes);
     getFilter(recipes);
     displayRecipes(recipes);
-    const search = document.querySelector('.search');
-    search.addEventListener('input', (evt) => {
+    document.querySelector('.search').addEventListener('input', (evt) => {
         filterGlobal(recipes);
     })
 };
@@ -41,28 +41,37 @@ async function getFilter(recipes) {
         const title = button.dataset.title;
         const search = document.querySelector(" input[name='"+ title +"']")
         let set = new Set();
-        recipes.forEach((recipe) => {
-            switch(title) {
-                case 'ingrédients':
-                    recipe.ingredients.forEach((r) => {
-                        set.add(r.ingredient.toLowerCase());
-                    })
-                    break;
-                case 'appareils':
-                    set.add(recipe.appliance.toLowerCase())
-                    break;
-                case 'ustensiles':
-                    recipe.ustensils.forEach((u) => {
-                        set.add(u.toLowerCase());
-                    })
-                    break;
-            }
-        })
+        if (recipes != undefined)
+        {
+            recipes.forEach((recipe) => {
+                switch(title) {
+                    case 'ingrédients':
+                        recipe.ingredients.forEach((r) => {
+                            set.add(r.ingredient.toLowerCase());
+                        })
+                        break;
+                    case 'appareils':
+                        set.add(recipe.appliance.toLowerCase())
+                        break;
+                    case 'ustensiles':
+                        recipe.ustensils.forEach((u) => {
+                            set.add(u.toLowerCase());
+                        })
+                        break;
+                }
+            })
+        }
         button.addEventListener('click', (evt) => {
             console.log(button, set, title);
             btn(button,set, title, recipes);
             search.focus();
         })
+        const tag = document.querySelectorAll('.searchFilter')
+        tag.forEach((element) => {
+        element.addEventListener('input', (evt) => {
+            filterTag(set, recipes, element)
+        })
+    })
         
 
     })

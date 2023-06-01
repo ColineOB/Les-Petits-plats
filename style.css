@@ -86,3 +86,27 @@ ul {
 .ustensiles {
     background-color: red;
 }
+.listFilter {
+    position: absolute;
+    top: 32px;
+    width: 500px;
+    border-radius: 5px;
+    border-radius: 5px;
+}
+  
+.input-icons {
+    width: 100%;
+}
+  
+.icon {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    padding: 10px;
+    min-width: 40px;
+}
+  
+.search {
+    width: 100%;
+    padding: 10px;
+}

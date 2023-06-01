@@ -62,7 +62,7 @@ function ingredientsList(ingredients) {
 
 
 function btn(button, set, title, recipes) {
-    console.log(recipes);
+    console.log(set, recipes);
     const input = document.querySelectorAll(".bouton")
     const inputSearch = document.querySelectorAll(".searchFilter")
     const search = document.querySelector(" input[name='"+ title +"']")
@@ -82,10 +82,14 @@ function reset (list, type){
 }
 
 function list(set, title, recipes) {
-    const div = document.querySelector(".listFilter")
-    div.innerHTML = "";
+    const allFilter = document.querySelectorAll(".listFilter");
+    for (let i = 0; i < allFilter.length; i++) {
+        allFilter[i].innerHTML = "";
+    }
+    console.log(allFilter, title);
+    const data = document.querySelector('[data-title='+ title +']');
+    const div = data.parentNode.querySelector(".listFilter")
     const ul = document.createElement('ul');
-    ul.innerHTML = "";
     set.forEach((list)=> {
         const li = document.createElement('li');
         li.append(list);
@@ -103,8 +107,7 @@ function list(set, title, recipes) {
             setAttributes(ul, {"class":"bg-danger"});
             break;
     }
-    div.append(ul)
-    console.log(ul);
-    selectTag(recipes, title)
+    div.append(ul);
+    selectTag(recipes, title);
     return ;
 }

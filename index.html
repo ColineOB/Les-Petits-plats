@@ -12,9 +12,9 @@
 <body>
     <h1 class="text-center text-danger"><i class="fa-solid fa-hat-chef"></i><br /> Les petits plats</h1>
     <div class="input-group w-75 mx-auto mt-3 py-2">
+        <div class="input-icons">
         <input class="search form-control" type="text" name="search" placeholder="recherche une recette">
-        <div class="input-group-append">
-            <i class="input-group-text fa-solid fa-magnifying-glass"></i>
+            <i class="fa-solid fa-magnifying-glass icon"></i>
         </div>
     </div>
     <div class="tags">
@@ -24,16 +24,18 @@
         <div class="btn-group">
             <button type="button" data-title="ingrédients" class="btn btn-primary dropdown-toggle mx-2 bouton" data-bs-toggle="dropdown" aria-expanded="false">ingrédients </button>
             <input class="searchFilter form-control bg-primary text-white" type="text" name="ingrédients" placeholder="Rechercher un ingrédients ▲" style="display: none;">
+            <div class="listFilter"></div>
         </div>
         <div class="btn-group">
             <button type="button" data-title="appareils" class="btn btn-success dropdown-toggle mx-2 bouton" data-bs-toggle="dropdown" aria-expanded="false">appareils </button>
             <input class="searchFilter form-control bg-success text-white" type="text" name="appareils" placeholder="Rechercher un appareils ▲" style="display: none;">
+            <div class="listFilter"></div>
         </div>
         <div class="btn-group">
             <button type="button" data-title="ustensiles" class="btn btn-danger dropdown-toggle mx-2 bouton" data-bs-toggle="dropdown" aria-expanded="false">ustensiles </button>
             <input class="searchFilter form-control bg-danger text-white" type="text" name="ustensiles" placeholder="Rechercher un ustensiles ▲" style="display: none">
+            <div class="listFilter"></div>
         </div>
-        <div class="listFilter"></div>
     </div>
     <div class="recipes-section row row-cols-3 mt-4 mx-2">
 
