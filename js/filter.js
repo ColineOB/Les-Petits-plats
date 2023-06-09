@@ -6,25 +6,27 @@ function filterGlobal(data) {
     let input = search.value
     let newData = new Set();
     if (search.value.length >= 3) {
-        boolean = true
-        let filterG = data.filter(function (el)
-        {
-            if (el.name.toLowerCase().includes(input.toLowerCase()) ||
-            el.appliance.toLowerCase().includes(input.toLowerCase())) {
-                newData.add(el)
+            boolean = true
+        for (let i = 0; i < data.length; i++) {
+            console.log(data[i]);
+            if ((data[i].name).includes(input.toLowerCase()) ||
+                data[i].appliance.toLowerCase().includes(input.toLowerCase())
+            ) {
+                newData.add(data[i])
             }
-            el.ustensils.filter(function(us) {
-                if (us.toLowerCase().includes(input.toLowerCase())) {
-                    newData.add(el)
+            for (let j = 0; j < data[i].ustensils.length; j++) {
+                if (data[i].ustensils[j].toLowerCase().includes(input.toLowerCase())) {
+                    newData.add(data[i])
                 }
-            })
-            el.ingredients.filter(function(li) {
-                if (li.ingredient.toLowerCase().includes(input.toLowerCase()))
+            }
+            const ingredients = data[i].ingredients;
+            for (const prop in ingredients) {
+                if (ingredients[prop].ingredient.toLowerCase().includes(input.toLowerCase()))
                 {
-                    newData.add(el)
+                    newData.add(data[i])
                 }
-            })
-        })
+            }
+        }
         tagFilter(Array.from(newData))
     } else if (boolean){
         boolean = false
@@ -40,13 +42,13 @@ function filterTag(set, recipes, div) {
     let array = Array.from(set);
     
     if (search.value) {
-        array.filter(function (el)
-        {
-            if (el.toLowerCase().includes(input.toLowerCase()))
+        for (let i = 0; i < array.length; i++) {
+            if (array[i].includes(input.toLowerCase()))
             {
-                newData.add(el)
+                newData.add(array[i])
             }
-        })
+            
+        }
         return list(newData, div.name, recipes)
     } else {
         return list(set, div.name, recipes)
@@ -85,30 +87,31 @@ function tagFilter(data) {
             const tag = child.querySelector("p");
             const close = child.querySelector("i")
             let newData = new Set();
-            let filterTag = data.filter(function (el) {
-                switch (child.className) {
-                    case 'ingrédients':
-                        el.ingredients.filter(function(li) {
-                            if (li.ingredient.toLowerCase().includes(tag.innerHTML.toLowerCase()))
-                            {
-                                newData.add(el)
+            for (let i = 0; i < data.length; i++) {
+                    switch (child.className) {
+                        case 'ingrédients':
+                            const ingredients = data[i].ingredients;
+                            for (const prop in ingredients) {
+                            if (ingredients[prop].ingredient.toLowerCase().includes(tag.innerHTML.toLowerCase()))
+                                {
+                                    newData.add(data[i])
+                                }
                             }
-                        })
-                        break;
-                    case 'appareils':
-                        if (el.appliance.toLowerCase().includes(tag.innerHTML.toLowerCase())) {
-                            newData.add(el)
-                        }
-                        break;
-                    case 'ustensiles':
-                        el.ustensils.filter(function(us) {
-                            if (us.toLowerCase().includes(tag.innerHTML.toLowerCase())) {
-                                newData.add(el)
+                            break;
+                        case 'appareils':
+                            if (data[i].appliance.toLowerCase().includes(tag.innerHTML.toLowerCase())) {
+                                newData.add(data[i])
                             }
-                        })
-                        break;
-                }
-            })
+                            break;
+                        case 'ustensiles':
+                            for (let j = 0; j < data[i].ustensils.length; j++) {
+                                if (data[i].ustensils[j].toLowerCase().includes(tag.innerHTML.toLowerCase())) {
+                                    newData.add(data[i])
+                                }
+                            }
+                            break;
+                    }
+            }
           init(Array.from(newData))
         }
     } else {
