@@ -73,7 +73,6 @@ function btn(button, set, title, recipes) {
     search.style.display = 'block';
     search.addEventListener('input', (evt) => {
         filterTag(set, recipes, search)
-        console.log(evt);
     })
  return list(set, title, recipes)
 }
