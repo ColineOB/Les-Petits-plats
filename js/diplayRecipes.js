@@ -62,7 +62,6 @@ function ingredientsList(ingredients) {
 
 
 function btn(button, set, title, recipes) {
-    console.log(set, recipes);
     const input = document.querySelectorAll(".bouton")
     const inputSearch = document.querySelectorAll(".searchFilter")
     const search = document.querySelector(" input[name='"+ title +"']")
@@ -72,6 +71,10 @@ function btn(button, set, title, recipes) {
         button.style.display = 'none';
     }
     search.style.display = 'block';
+    search.addEventListener('input', (evt) => {
+        filterTag(set, recipes, search)
+        console.log(evt);
+    })
  return list(set, title, recipes)
 }
 
@@ -86,7 +89,6 @@ function list(set, title, recipes) {
     for (let i = 0; i < allFilter.length; i++) {
         allFilter[i].innerHTML = "";
     }
-    console.log(allFilter, title);
     const data = document.querySelector('[data-title='+ title +']');
     const div = data.parentNode.querySelector(".listFilter")
     const ul = document.createElement('ul');
@@ -95,7 +97,6 @@ function list(set, title, recipes) {
         li.append(list);
         ul.append(li);
     })
-    console.log(title);
     switch (title) {
         case "ingrédients":
             setAttributes(ul, {"class":"bg-primary"});

@@ -10,17 +10,19 @@ async function getRecipes() {
 
 // init
 async function init(filter) {
-    console.log("init");
     let recipes = await getRecipes();
     closetags(recipes)
     if (filter !== undefined) {
        recipes = filter;
     }
-    console.log(recipes);
     getFilter(recipes);
     displayRecipes(recipes);
-    document.querySelector('.search').addEventListener('input', (evt) => {
+    const search = document.querySelector('.search')
+    search.addEventListener('input', (evt) => {
         filterGlobal(recipes);
+    });
+    search.addEventListener('click',(evt) => {
+        closeFilter();
     })
 };
 
@@ -62,18 +64,10 @@ async function getFilter(recipes) {
             })
         }
         button.addEventListener('click', (evt) => {
-            console.log(button, set, title);
+            console.log("button", button);
             btn(button,set, title, recipes);
             search.focus();
         })
-        const tag = document.querySelectorAll('.searchFilter')
-        tag.forEach((element) => {
-        element.addEventListener('input', (evt) => {
-            filterTag(set, recipes, element)
-        })
-    })
-        
-
     })
 }
 

@@ -2,8 +2,6 @@ let boolean = true;
 
 //filter Global
 function filterGlobal(data) {
-    console.log("filterGlobal", boolean);
-    closeFilter(); 
     const search = document.querySelector('.search');
     let input = search.value
     let newData = new Set();
@@ -27,11 +25,9 @@ function filterGlobal(data) {
                 }
             })
         })
-        console.log(newData);
         tagFilter(Array.from(newData))
     } else if (boolean){
         boolean = false
-        console.log('filter global else');
         tagFilter(data);
     }
 }
@@ -42,10 +38,8 @@ function filterTag(set, recipes, div) {
     let input = search.value
     let newData = new Set();
     let array = Array.from(set);
-
     
     if (search.value) {
-        console.log(search.value, div.name);
         array.filter(function (el)
         {
             if (el.toLowerCase().includes(input.toLowerCase()))
@@ -61,7 +55,6 @@ function filterTag(set, recipes, div) {
 
 //if select tag by filter
 function selectTag(recipes, title) {
-    console.log("coucou");
     const listFilter = document.querySelectorAll('.listFilter ul li');
     const listTags = document.querySelector(".tags ul")
     const input = document.querySelectorAll(".bouton")
@@ -85,14 +78,12 @@ function selectTag(recipes, title) {
 
 // filter recipes by tags
 function tagFilter(data) {
-    console.log("data", data);
     const listTags = document.querySelector(".tags ul")
     
     if (listTags.children.length > 0) {
         for (const child of listTags.children) {
             const tag = child.querySelector("p");
             const close = child.querySelector("i")
-            console.log(tag.innerHTML, child.className);
             let newData = new Set();
             let filterTag = data.filter(function (el) {
                 switch (child.className) {
@@ -132,8 +123,10 @@ function closeFilter() {
         const search = document.querySelector(" input[name='"+ title +"']")
         search.style.display = 'none';
         button.style.display = 'block';
-        const div = document.querySelector(".listFilter")
-        div.innerHTML = "";
+        const div = document.querySelectorAll(".listFilter")
+        div.forEach((el) => {
+            el.innerHTML = "";
+        })
     })
 }
 
@@ -143,7 +136,6 @@ function closetags(data) {
     listTags.forEach((close) => {
         close.addEventListener("click", (evt) => {
             close.parentElement.remove()
-            console.log("click", data);
             boolean = true
             filterGlobal(data);
           })
