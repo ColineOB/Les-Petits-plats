@@ -8,7 +8,6 @@ function filterGlobal(data) {
     if (search.value.length >= 3) {
             boolean = true
         for (let i = 0; i < data.length; i++) {
-            console.log(data[i]);
             if ((data[i].name).includes(input.toLowerCase()) ||
                 data[i].appliance.toLowerCase().includes(input.toLowerCase())
             ) {
@@ -60,22 +59,49 @@ function selectTag(recipes, title) {
     const listFilter = document.querySelectorAll('.listFilter ul li');
     const listTags = document.querySelector(".tags ul")
     const input = document.querySelectorAll(".bouton")
-    listFilter.forEach((tag) => {
-        tag.addEventListener('click', (evt) => {
+    for (let i = 0; i < listFilter.length; i++) {
+        listFilter[i].addEventListener('click', (evt) => {
             const li = document.createElement('li');
             const close = document.createElement('i');
             const p = document.createElement('p');
-            li.setAttribute("class",title);
+            switch (title) {
+                case "ingrédients":
+                    setAttributes(li, {"class":"bg-primary " + title});
+                    break;
+                case "appareils":
+                    setAttributes(li, {"class":"bg-success " + title});
+                    break;
+                case "ustensiles":
+                    setAttributes(li, {"class":"bg-danger " + title});
+                    break;
+            }
             close.setAttribute("class",'fa-solid fa-xmark')
             p.append(evt.target.innerHTML);
             li.append(p, close);
             listTags.append(li)
-            input.forEach(function() {
+            for (let j = 0; j < input.length; j++) {
                 closeFilter();
-            })
+            }
             tagFilter(recipes);
         })
-    })
+        
+    }
+    // listFilter.forEach((tag) => {
+    //     tag.addEventListener('click', (evt) => {
+    //         const li = document.createElement('li');
+    //         const close = document.createElement('i');
+    //         const p = document.createElement('p');
+    //         li.setAttribute("class",title);
+    //         close.setAttribute("class",'fa-solid fa-xmark')
+    //         p.append(evt.target.innerHTML);
+    //         li.append(p, close);
+    //         listTags.append(li)
+    //         input.forEach(function() {
+    //             closeFilter();
+    //         })
+    //         tagFilter(recipes);
+    //     })
+    // })
 }
 
 // filter recipes by tags
@@ -88,7 +114,8 @@ function tagFilter(data) {
             const close = child.querySelector("i")
             let newData = new Set();
             for (let i = 0; i < data.length; i++) {
-                    switch (child.className) {
+                let type = child.className.split(" ").splice(-1)[0]
+                    switch (type) {
                         case 'ingrédients':
                             const ingredients = data[i].ingredients;
                             for (const prop in ingredients) {
@@ -121,27 +148,44 @@ function tagFilter(data) {
 
 function closeFilter() {
     const input = document.querySelectorAll(".bouton")
-    input.forEach(function(button) {
-        const title = button.dataset.title;
+    for (let i = 0; i < input.length; i++) {
+        const title = input[i].dataset.title;
         const search = document.querySelector(" input[name='"+ title +"']")
-        search.style.display = 'none';
-        button.style.display = 'block';
-        const div = document.querySelectorAll(".listFilter")
-        div.forEach((el) => {
-            el.innerHTML = "";
-        })
-    })
+        search.parentNode.style.display = 'none';
+        input[i].style.display = 'block';
+        const div = document.querySelectorAll(".listFilter");
+        for (let j = 0; j < div.length; j++) {
+            div[i].innerHTML = "";
+        }
+    }
+    // input.forEach(function(button) {
+    //     const title = button.dataset.title;
+    //     const search = document.querySelector(" input[name='"+ title +"']")
+    //     search.style.display = 'none';
+    //     button.style.display = 'block';
+    //     const div = document.querySelectorAll(".listFilter")
+    //     div.forEach((el) => {
+    //         el.innerHTML = "";
+    //     })
+    // })
 }
 
 // delete tags
 function closetags(data) {
     const listTags = document.querySelectorAll(".tags ul li i")
-    listTags.forEach((close) => {
-        close.addEventListener("click", (evt) => {
-            close.parentElement.remove()
+    for (let i = 0; i < listTags.length; i++) {
+        listTags[i].addEventListener("click", (evt) => {
+            listTags[i].parentElement.remove()
             boolean = true
             filterGlobal(data);
-          })
-    })
+        })
+    }
+    // listTags.forEach((close) => {
+    //     close.addEventListener("click", (evt) => {
+    //         close.parentElement.remove()
+    //         boolean = true
+    //         filterGlobal(data);
+    //       })
+    // })
 
 }

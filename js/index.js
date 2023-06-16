@@ -29,46 +29,80 @@ async function init(filter) {
 async function displayRecipes(recipes) {
     const querySelector = document.querySelector(".recipes-section");
     querySelector.innerHTML = '';
-    recipes.forEach((recipe) => {
-        const recipeModel = recipeFactory(recipe);
+    for (let i = 0; i < recipes.length; i++) {
+        const recipeModel = recipeFactory(recipes[i]);
         const recipeCardDom = recipeModel.getRecipeCardDom();
-        querySelector.appendChild(recipeCardDom)
-    })
+        querySelector.appendChild(recipeCardDom)    
+    }
+    // recipes.forEach((recipe) => {
+    //     const recipeModel = recipeFactory(recipe);
+    //     const recipeCardDom = recipeModel.getRecipeCardDom();
+    //     querySelector.appendChild(recipeCardDom)
+    // })
 };
 
 async function getFilter(recipes) {
     //creation list
     const input = document.querySelectorAll(".bouton")
-    input.forEach(function(button) {
-        const title = button.dataset.title;
+    for (let i = 0; i < input.length; i++) {
+        const title = input[i].dataset.title;
         const search = document.querySelector(" input[name='"+ title +"']")
         let set = new Set();
-        if (recipes != undefined)
-        {
-            recipes.forEach((recipe) => {
+        if (recipes != undefined) {
+            for (let j = 0; j < recipes.length; j++) {
                 switch(title) {
                     case 'ingrédients':
-                        recipe.ingredients.forEach((r) => {
-                            set.add(r.ingredient.toLowerCase());
-                        })
+                        for (const key in recipes[j].ingredients) {
+                            set.add(recipes[j].ingredients[key].ingredient.toLowerCase())
+                        }
                         break;
                     case 'appareils':
-                        set.add(recipe.appliance.toLowerCase())
+                        set.add(recipes[j].appliance.toLowerCase())
                         break;
                     case 'ustensiles':
-                        recipe.ustensils.forEach((u) => {
-                            set.add(u.toLowerCase());
-                        })
+                        for (const key in recipes[j].ustensils) {
+                            set.add(recipes[j].ustensils[key].toLowerCase());
+                        }
                         break;
                 }
+            }
+            
+            input[i].addEventListener('click', (evt) => {
+                btn(input[i],set, title, recipes);
+                search.focus();
             })
         }
-        button.addEventListener('click', (evt) => {
-            console.log("button", button);
-            btn(button,set, title, recipes);
-            search.focus();
-        })
-    })
+    }
+    // input.forEach(function(button) {
+    //     const title = button.dataset.title;
+    //     const search = document.querySelector(" input[name='"+ title +"']")
+    //     let set = new Set();
+    //     if (recipes != undefined)
+    //     {
+    //         recipes.forEach((recipe) => {
+    //             switch(title) {
+    //                 case 'ingrédients':
+    //                     recipe.ingredients.forEach((r) => {
+    //                         set.add(r.ingredient.toLowerCase());
+    //                     })
+    //                     break;
+    //                 case 'appareils':
+    //                     set.add(recipe.appliance.toLowerCase())
+    //                     break;
+    //                 case 'ustensiles':
+    //                     recipe.ustensils.forEach((u) => {
+    //                         set.add(u.toLowerCase());
+    //                     })
+    //                     break;
+    //             }
+    //         })
+    //     }
+    //     button.addEventListener('click', (evt) => {
+    //         console.log("button", button);
+    //         btn(button,set, title, recipes);
+    //         search.focus();
+    //     })
+    // })
 }
 
 getFilter()

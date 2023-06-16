@@ -62,26 +62,26 @@ function ingredientsList(ingredients) {
 
 
 function btn(button, set, title, recipes) {
-    const input = document.querySelectorAll(".bouton")
-    const inputSearch = document.querySelectorAll(".searchFilter")
-    const search = document.querySelector(" input[name='"+ title +"']")
+    const input = document.querySelectorAll(".bouton");
+    const inputSearch = document.querySelectorAll(".btn-group > .input-icons");
+    const search = document.querySelector(" input[name='"+ title +"']");
     reset(input, 'block');
     reset(inputSearch, 'none');
     if (button != undefined) {
         button.style.display = 'none';
     }
-    search.style.display = 'block';
+    search.parentNode.style.display = 'block';
     search.addEventListener('input', (evt) => {
         filterTag(set, recipes, search)
-        console.log(evt);
     })
  return list(set, title, recipes)
 }
 
 function reset (list, type){
-    list.forEach(function(elem) {
-        elem.style.display = type;
-    })
+    for (let i = 0; i < list.length; i++) {
+        list[i].style.display = type;
+        
+    }
 }
 
 function list(set, title, recipes) {
@@ -92,11 +92,11 @@ function list(set, title, recipes) {
     const data = document.querySelector('[data-title='+ title +']');
     const div = data.parentNode.querySelector(".listFilter")
     const ul = document.createElement('ul');
-    set.forEach((list)=> {
+    for (const element of set) {
         const li = document.createElement('li');
-        li.append(list);
+        li.append(element);
         ul.append(li);
-    })
+    }
     switch (title) {
         case "ingrédients":
             setAttributes(ul, {"class":"bg-primary"});
