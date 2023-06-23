@@ -7,6 +7,12 @@ body {
     height: 200px;
     background-color: gray;
 }
+.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
 
 .filter input {
     border: none;
@@ -75,23 +81,23 @@ ul {
     margin:0 10px 0 0;
 }
 
-.ingrédients {
-    background-color: blue;
+.tags ul li i{
+    cursor: pointer;
 }
 
-.appareils {
-    background-color: green;
-}
-
-.ustensiles {
-    background-color: red;
-}
 .listFilter {
     position: absolute;
     top: 32px;
     width: 500px;
-    border-radius: 5px;
-    border-radius: 5px;
+}
+
+.listFilter ul {
+    padding-bottom: 10px;
+    border-radius: 0 0 5px 5px;
+}
+
+.listFilter ul {
+    cursor: pointer;
 }
   
 .input-icons {
@@ -102,11 +108,21 @@ ul {
     position: absolute;
     top: 10px;
     right: 0;
-    padding: 10px;
-    min-width: 40px;
 }
   
 .search {
     width: 100%;
     padding: 10px;
+}
+
+.fa-magnifying-glass {
+    padding: 10px;
+    min-width: 40px;
+}
+
+.fa-caret-up {
+    color: white;
+    font-size: 10px;
+    padding: 5px;
+    min-width: 30px;
 }

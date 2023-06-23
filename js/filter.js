@@ -63,7 +63,17 @@ function selectTag(recipes, title) {
             const li = document.createElement('li');
             const close = document.createElement('i');
             const p = document.createElement('p');
-            li.setAttribute("class",title);
+            switch (title) {
+                case "ingrédients":
+                    setAttributes(li, {"class":"bg-primary " + title});
+                    break;
+                case "appareils":
+                    setAttributes(li, {"class":"bg-success " + title});
+                    break;
+                case "ustensiles":
+                    setAttributes(li, {"class":"bg-danger " + title});
+                    break;
+            }
             close.setAttribute("class",'fa-solid fa-xmark')
             p.append(evt.target.innerHTML);
             li.append(p, close);
@@ -86,7 +96,8 @@ function tagFilter(data) {
             const close = child.querySelector("i")
             let newData = new Set();
             let filterTag = data.filter(function (el) {
-                switch (child.className) {
+                let type = child.className.split(" ").splice(-1)[0]
+                switch (type) {
                     case 'ingrédients':
                         el.ingredients.filter(function(li) {
                             if (li.ingredient.toLowerCase().includes(tag.innerHTML.toLowerCase()))
@@ -121,7 +132,7 @@ function closeFilter() {
     input.forEach(function(button) {
         const title = button.dataset.title;
         const search = document.querySelector(" input[name='"+ title +"']")
-        search.style.display = 'none';
+        search.parentNode.style.display = 'none';
         button.style.display = 'block';
         const div = document.querySelectorAll(".listFilter")
         div.forEach((el) => {

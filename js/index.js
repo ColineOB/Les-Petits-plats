@@ -64,7 +64,6 @@ async function getFilter(recipes) {
             })
         }
         button.addEventListener('click', (evt) => {
-            console.log("button", button);
             btn(button,set, title, recipes);
             search.focus();
         })

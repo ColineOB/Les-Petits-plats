@@ -63,14 +63,14 @@ function ingredientsList(ingredients) {
 
 function btn(button, set, title, recipes) {
     const input = document.querySelectorAll(".bouton")
-    const inputSearch = document.querySelectorAll(".searchFilter")
+    const inputSearch = document.querySelectorAll(".btn-group > .input-icons")
     const search = document.querySelector(" input[name='"+ title +"']")
     reset(input, 'block');
     reset(inputSearch, 'none');
     if (button != undefined) {
         button.style.display = 'none';
     }
-    search.style.display = 'block';
+    search.parentNode.style.display = 'block';
     search.addEventListener('input', (evt) => {
         filterTag(set, recipes, search)
     })
