@@ -43,6 +43,7 @@ function setAttributes(element, attrs) {
     }
 }
 
+//create an ingredient list
 function ingredientsList(ingredients) {
     const ul = document.createElement('ul');
     for(var k in ingredients) {
@@ -57,24 +58,24 @@ function ingredientsList(ingredients) {
         }
         ul.append(li);
     }
-    return ul
+    return ul;
 }
 
 
 function btn(button, set, title, recipes) {
-    const input = document.querySelectorAll(".bouton")
-    const inputSearch = document.querySelectorAll(".btn-group > .input-icons")
-    const search = document.querySelector(" input[name='"+ title +"']")
+    const input = document.querySelectorAll(".bouton");
+    const inputSearch = document.querySelectorAll(".btn-group > .input-icons");
+    const search = document.querySelector(" input[name='"+ title +"']");
     reset(input, 'block');
     reset(inputSearch, 'none');
     if (button != undefined) {
         button.style.display = 'none';
     }
     search.parentNode.style.display = 'block';
-    search.addEventListener('input', (evt) => {
+    search.addEventListener('input', () => {
         filterTag(set, recipes, search)
     })
- return list(set, title, recipes)
+ return list(set, title, recipes);
 }
 
 function reset (list, type){
@@ -83,31 +84,33 @@ function reset (list, type){
     })
 }
 
+//list of different tags
 function list(set, title, recipes) {
     const allFilter = document.querySelectorAll(".listFilter");
     for (let i = 0; i < allFilter.length; i++) {
         allFilter[i].innerHTML = "";
     }
     const data = document.querySelector('[data-title='+ title +']');
-    const div = data.parentNode.querySelector(".listFilter")
+    const div = data.parentNode.querySelector(".listFilter");
     const ul = document.createElement('ul');
-    set.forEach((list)=> {
-        const li = document.createElement('li');
-        li.append(list);
-        ul.append(li);
-    })
-    switch (title) {
-        case "ingrédients":
-            setAttributes(ul, {"class":"bg-primary"});
-            break;
-        case "appareils":
-            setAttributes(ul, {"class":"bg-success"});
-            break;
-        case "ustensiles":
-            setAttributes(ul, {"class":"bg-danger"});
-            break;
+    if (set.size !== 0) {
+        set.forEach((list)=> {
+            const li = document.createElement('li');
+            li.append(list);
+            ul.append(li);
+        })
+        switch (title) {
+            case "ingrédients":
+                setAttributes(ul, {"class":"bg-primary"});
+                break;
+            case "appareils":
+                setAttributes(ul, {"class":"bg-success"});
+                break;
+            case "ustensiles":
+                setAttributes(ul, {"class":"bg-danger"});
+                break;
+        }
+        div.append(ul);
+        selectTag(recipes, title);
     }
-    div.append(ul);
-    selectTag(recipes, title);
-    return ;
 }

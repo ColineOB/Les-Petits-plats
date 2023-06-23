@@ -41,7 +41,7 @@ async function getFilter(recipes) {
     const input = document.querySelectorAll(".bouton")
     input.forEach(function(button) {
         const title = button.dataset.title;
-        const search = document.querySelector(" input[name='"+ title +"']")
+        const search = document.querySelector(" input[name='"+ title +"']");
         let set = new Set();
         if (recipes != undefined)
         {
@@ -53,7 +53,7 @@ async function getFilter(recipes) {
                         })
                         break;
                     case 'appareils':
-                        set.add(recipe.appliance.toLowerCase())
+                        set.add(recipe.appliance.toLowerCase());
                         break;
                     case 'ustensiles':
                         recipe.ustensils.forEach((u) => {
@@ -70,5 +70,4 @@ async function getFilter(recipes) {
     })
 }
 
-getFilter()
 init();

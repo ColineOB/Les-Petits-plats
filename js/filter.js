@@ -127,6 +127,7 @@ function tagFilter(data) {
     }
 }
 
+//close all filter
 function closeFilter() {
     const input = document.querySelectorAll(".bouton")
     input.forEach(function(button) {
