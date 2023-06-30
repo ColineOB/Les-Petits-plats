@@ -10,23 +10,30 @@ async function getRecipes() {
 
 // init
 async function init(filter) {
+    try {
     let recipes = await getRecipes();
-    closetags(recipes)
-    if (filter !== undefined) {
-       recipes = filter;
+    console.log(recipes);
+        closetags(recipes);
+        if (filter !== undefined) {
+        recipes = filter;
+        }
+        await displayRecipes(recipes);
+        await getFilter(recipes);
+        const search = document.querySelector('.search')
+        search.addEventListener('input', (evt) => {
+            filterGlobal(recipes);
+        });
+        search.addEventListener('click',(evt) => {
+            closeFilter();
+        })
+    } catch (e) {
+        throw new Error('Error init ça fait chier', e)
+
     }
-    getFilter(recipes);
-    displayRecipes(recipes);
-    const search = document.querySelector('.search')
-    search.addEventListener('input', (evt) => {
-        filterGlobal(recipes);
-    });
-    search.addEventListener('click',(evt) => {
-        closeFilter();
-    })
 };
 
 async function displayRecipes(recipes) {
+    try {
     const querySelector = document.querySelector(".recipes-section");
     querySelector.innerHTML = '';
     recipes.forEach((recipe) => {
@@ -34,9 +41,13 @@ async function displayRecipes(recipes) {
         const recipeCardDom = recipeModel.getRecipeCardDom();
         querySelector.appendChild(recipeCardDom)
     })
+    } catch (e) {
+        throw new Error('Error displayRecipes', e)
+    }
 };
 
 async function getFilter(recipes) {
+    try {
     //creation list
     const input = document.querySelectorAll(".bouton")
     input.forEach(function(button) {
@@ -62,14 +73,19 @@ async function getFilter(recipes) {
                         break;
                 }
             })
+            button.addEventListener('click', (evt) => {
+                evt.preventDefault
+                evt.stopPropagation
+                evt.stopImmediatePropagation
+                console.log("click");
+                btn(button,set, title, recipes);
+                search.focus();
+            })
         }
-        button.addEventListener('click', (evt) => {
-            console.log("button", button);
-            btn(button,set, title, recipes);
-            search.focus();
-        })
     })
+    } catch (e) {
+        throw new Error('Error getFilter', e)
+    }
 }
 
-getFilter()
 init();

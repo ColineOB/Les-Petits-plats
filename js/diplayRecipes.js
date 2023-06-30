@@ -57,6 +57,7 @@ function ingredientsList(ingredients) {
         }
         ul.append(li);
     }
+    
     return ul
 }
 
@@ -110,5 +111,4 @@ function list(set, title, recipes) {
     }
     div.append(ul);
     selectTag(recipes, title);
-    return ;
 }

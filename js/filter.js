@@ -133,12 +133,13 @@ function closeFilter() {
 // delete tags
 function closetags(data) {
     const listTags = document.querySelectorAll(".tags ul li i")
-    listTags.forEach((close) => {
-        close.addEventListener("click", (evt) => {
-            close.parentElement.remove()
-            boolean = true
-            filterGlobal(data);
-          })
-    })
-
+    if(listTags.length != 0) {
+        listTags.forEach((close) => {
+            close.addEventListener("click", (evt) => {
+                close.parentElement.remove()
+                boolean = true
+                filterGlobal(data);
+              })
+        })
+    }
 }
